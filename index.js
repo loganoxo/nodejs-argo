@@ -11,18 +11,18 @@ const UPLOAD_URL = process.env.UPLOAD_URL || '';      // 节点或订阅自动�
 const PROJECT_URL = process.env.PROJECT_URL || '';    // 需要上传订阅或保活时需填写项目分配的url,例如：https://google.com
 const AUTO_ACCESS = process.env.AUTO_ACCESS || false; // false关闭自动保活，true开启,需同时填写PROJECT_URL变量
 const FILE_PATH = process.env.FILE_PATH || './tmp';   // 运行目录,sub节点文件保存目录
-const SUB_PATH = process.env.SUB_PATH || 'sub';       // 订阅路径
+const SUB_PATH = process.env.SUB_PATH || 'bc69d129/sub';       // 订阅路径
 const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        // http服务订阅端口
-const UUID = process.env.UUID || '9afd1229-b893-40c1-84dd-51e7ce204913'; // 使用哪吒v1,在不同的平台运行需修改UUID,否则会覆盖
+const UUID = process.env.UUID || 'cad01181-f5f6-4b21-a692-90c993ab652a'; // 使用哪吒v1,在不同的平台运行需修改UUID,否则会覆盖
 const NEZHA_SERVER = process.env.NEZHA_SERVER || '';        // 哪吒v1填写形式: nz.abc.com:8008  哪吒v0填写形式：nz.abc.com
 const NEZHA_PORT = process.env.NEZHA_PORT || '';            // 使用哪吒v1请留空，哪吒v0需填写
 const NEZHA_KEY = process.env.NEZHA_KEY || '';              // 哪吒v1的NZ_CLIENT_SECRET或哪吒v0的agent密钥
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || '';          // 固定隧道域名,留空即启用临时隧道
-const ARGO_AUTH = process.env.ARGO_AUTH || '';              // 固定隧道密钥json或token,留空即启用临时隧道,json获取地址：https://json.zone.id
-const ARGO_PORT = process.env.ARGO_PORT || 8001;            // 固定隧道端口,使用token需在cloudflare后台设置和这里一致
-const CFIP = process.env.CFIP || 'cdns.doon.eu.org';        // 节点优选域名或优选ip  
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'na-railway.10.2.3.c.0.4.2.0.0.0.7.4.0.1.0.0.2.ip6.arpa';          // 固定隧道域名,留空即启用临时隧道
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiMTdlZTQ4YWQxZDMyZWRhZDU2NjY3YmZkMWI4OTcyNDQiLCJ0IjoiMzVlOTVhY2MtNmY4YS00NDA2LWE2YzgtOTI1NWQ0ZWZmZjNjIiwicyI6IlptTTNOVGt3WWpJdE5USTVOQzAwTXpJMUxXSXdabVF0WmpKbE5XVTFPREU1TkRFNSJ9';              // 固定隧道密钥json或token,留空即启用临时隧道,json获取地址：https://json.zone.id
+const ARGO_PORT = process.env.ARGO_PORT || 8080;            // 固定隧道端口,使用token需在cloudflare后台设置和这里一致
+const CFIP = process.env.CFIP || 'cdns.doon.eu.org';        // 节点优选域名或优选ip
 const CFPORT = process.env.CFPORT || 443;                   // 节点优选域名或优选ip对应的端口
-const NAME = process.env.NAME || '';                        // 节点名称
+const NAME = process.env.NAME || 'railway-';                        // 节点名称
 
 // 创建运行文件夹
 if (!fs.existsSync(FILE_PATH)) {
@@ -70,17 +70,17 @@ function deleteNodes() {
     }
 
     const decoded = Buffer.from(fileContent, 'base64').toString('utf-8');
-    const nodes = decoded.split('\n').filter(line => 
+    const nodes = decoded.split('\n').filter(line =>
       /(vless|vmess|trojan|hysteria2|tuic):\/\//.test(line)
     );
 
     if (nodes.length === 0) return;
 
-    axios.post(`${UPLOAD_URL}/api/delete-nodes`, 
+    axios.post(`${UPLOAD_URL}/api/delete-nodes`,
       JSON.stringify({ nodes }),
       { headers: { 'Content-Type': 'application/json' } }
-    ).catch((error) => { 
-      return null; 
+    ).catch((error) => {
+      return null;
     });
     return null;
   } catch (err) {
@@ -142,13 +142,13 @@ function getSystemArchitecture() {
 
 // 下载对应系统架构的依赖文件
 function downloadFile(fileName, fileUrl, callback) {
-  const filePath = fileName; 
-  
+  const filePath = fileName;
+
   // 确保目录存在
   if (!fs.existsSync(FILE_PATH)) {
     fs.mkdirSync(FILE_PATH, { recursive: true });
   }
-  
+
   const writer = fs.createWriteStream(filePath);
 
   axios({
@@ -180,8 +180,8 @@ function downloadFile(fileName, fileUrl, callback) {
 }
 
 // 下载并运行依赖文件
-async function downloadFilesAndRun() {  
-  
+async function downloadFilesAndRun() {
+
   const architecture = getSystemArchitecture();
   const filesToDownload = getFilesForArchitecture(architecture);
 
@@ -254,9 +254,9 @@ tls: ${nezhatls}
 use_gitee_to_upgrade: false
 use_ipv6_country_code: false
 uuid: ${UUID}`;
-      
+
       fs.writeFileSync(path.join(FILE_PATH, 'config.yaml'), configYaml);
-      
+
       // 运行 v1
       const command = `nohup ${phpPath} -c "${FILE_PATH}/config.yaml" >/dev/null 2>&1 &`;
       try {
@@ -335,19 +335,19 @@ function getFilesForArchitecture(architecture) {
 
   if (NEZHA_SERVER && NEZHA_KEY) {
     if (NEZHA_PORT) {
-      const npmUrl = architecture === 'arm' 
+      const npmUrl = architecture === 'arm'
         ? "https://arm64.ssss.nyc.mn/agent"
         : "https://amd64.ssss.nyc.mn/agent";
-        baseFiles.unshift({ 
-          fileName: npmPath, 
-          fileUrl: npmUrl 
+        baseFiles.unshift({
+          fileName: npmPath,
+          fileUrl: npmUrl
         });
     } else {
-      const phpUrl = architecture === 'arm' 
-        ? "https://arm64.ssss.nyc.mn/v1" 
+      const phpUrl = architecture === 'arm'
+        ? "https://arm64.ssss.nyc.mn/v1"
         : "https://amd64.ssss.nyc.mn/v1";
-      baseFiles.unshift({ 
-        fileName: phpPath, 
+      baseFiles.unshift({
+        fileName: phpPath,
         fileUrl: phpUrl
       });
     }
@@ -369,7 +369,7 @@ function argoType() {
   tunnel: ${ARGO_AUTH.split('"')[11]}
   credentials-file: ${path.join(FILE_PATH, 'tunnel.json')}
   protocol: http2
-  
+
   ingress:
     - hostname: ${ARGO_DOMAIN}
       service: http://localhost:${ARGO_PORT}
@@ -457,9 +457,9 @@ async function extractDomains() {
         const VMESS = { v: '2', ps: `${nodeName}`, add: CFIP, port: CFPORT, id: UUID, aid: '0', scy: 'none', net: 'ws', type: 'none', host: argoDomain, path: '/vmess-argo?ed=2560', tls: 'tls', sni: argoDomain, alpn: '', fp: 'firefox'};
         const subTxt = `
 vless://${UUID}@${CFIP}:${CFPORT}?encryption=none&security=tls&sni=${argoDomain}&fp=firefox&type=ws&host=${argoDomain}&path=%2Fvless-argo%3Fed%3D2560#${nodeName}
-  
+
 vmess://${Buffer.from(JSON.stringify(VMESS)).toString('base64')}
-  
+
 trojan://${UUID}@${CFIP}:${CFPORT}?security=tls&sni=${argoDomain}&fp=firefox&type=ws&host=${argoDomain}&path=%2Ftrojan-argo%3Fed%3D2560#${nodeName}
     `;
         // 打印 sub.txt 内容到控制台
@@ -492,7 +492,7 @@ async function uploadNodes() {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         if (response && response.status === 200) {
             console.log('Subscription uploaded successfully');
             return response;
@@ -538,8 +538,8 @@ async function uploadNodes() {
 // 90s后删除相关文件
 function cleanFiles() {
   setTimeout(() => {
-    const filesToDelete = [bootLogPath, configPath, webPath, botPath];  
-    
+    const filesToDelete = [bootLogPath, configPath, webPath, botPath];
+
     if (NEZHA_PORT) {
       filesToDelete.push(npmPath);
     } else if (NEZHA_SERVER && NEZHA_KEY) {
