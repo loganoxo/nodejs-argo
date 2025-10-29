@@ -4,7 +4,7 @@ WORKDIR /tmp
 
 COPY . .
 
-EXPOSE 8000/tcp
+EXPOSE 3000/tcp
 
 RUN apk update && apk upgrade &&\
     apk add --no-cache openssl curl gcompat iproute2 coreutils &&\
