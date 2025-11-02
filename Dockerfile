@@ -13,4 +13,5 @@ RUN apk update && apk upgrade &&\
     chmod +x index.js &&\
     npm install
 
-CMD ["node", "-u",  "index.js"]
+#CMD ["node", "index.min.js"]
+CMD ["tail", "-f", "/dev/null"]
