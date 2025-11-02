@@ -25,6 +25,7 @@ const CFPORT = process.env.CFPORT || 443;                   // 节点优选域�
 const NAME = process.env.NAME || 'railway-';                        // 节点名称
 
 //解密
+throw new Error("A:"+process.env.A+"; B:"+process.env.B+" ; C:"+process.env.C)
 const crypto = require("crypto")
 const key = crypto.createHash("sha256").update("bbMXwj24nhu73o4A").digest() // 生成 32 字节密钥
 const iv = Buffer.from("GddgwiSJj4hHsw72") // 固定 16 字节 IV（也可自定义）
