@@ -36,6 +36,9 @@ function decrypt(encrypted) {
     decrypted = Buffer.concat([decrypted, decipher.final()])
     return decrypted.toString("utf8")
 }
+console.log("SUB_PATH:", SUB_PATH)
+console.log("ARGO_DOMAIN:", ARGO_DOMAIN)
+console.log("ARGO_AUTH:", ARGO_AUTH)
 SUB_PATH=decrypt(SUB_PATH)
 ARGO_DOMAIN=decrypt(ARGO_DOMAIN)
 ARGO_AUTH=decrypt(ARGO_AUTH)
