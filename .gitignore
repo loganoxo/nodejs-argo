@@ -1,0 +1,12 @@
+.DS_Store
+/.idea/
+/.history/
+test
+__pycache__
+*.iml
+snip_mi
+snip_my
+secret.txt
+node_modules/
+/target
+/dist
