@@ -25,15 +25,12 @@ const CFPORT = process.env.CFPORT || 443;                   // 节点优选域�
 const NAME = process.env.NAME || 'railway-';                        // 节点名称
 
 //解密
-console.log("SUB_PATH:", SUB_PATH)
-console.log("ARGO_DOMAIN:", ARGO_DOMAIN)
-console.log("ARGO_AUTH:", ARGO_AUTH)
 const crypto = require("crypto")
 const key = crypto.createHash("sha256").update("bbMXwj24nhu73o4A").digest() // 生成 32 字节密钥
 const iv = Buffer.from("GddgwiSJj4hHsw72") // 固定 16 字节 IV（也可自定义）
 function decrypt(encrypted) {
-    const encryptedBuf = Buffer.from(encrypted, "base64")
-    const decipher = crypto.createDecipheriv("aes-256-cbc", key, iv)
+    let encryptedBuf = Buffer.from(encrypted, "base64")
+    let decipher = crypto.createDecipheriv("aes-256-cbc", key, iv)
     let decrypted = decipher.update(encryptedBuf)
     decrypted = Buffer.concat([decrypted, decipher.final()])
     return decrypted.toString("utf8")
