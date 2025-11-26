@@ -6,7 +6,7 @@ __pycache__
 *.iml
 snip_mi
 snip_my
-secret.js
+secret*.js
 railway.md
 node_modules/
 /target

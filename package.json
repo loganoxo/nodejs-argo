@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "node index.js",
     "start": "node index.js",
-    "encrypted": "node secret.js"
+    "encrypted1": "node secret1.js",
+    "encrypted2": "node secret2.js"
   },
   "dependencies": {
     "axios": "latest",

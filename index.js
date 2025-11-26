@@ -13,16 +13,16 @@ const AUTO_ACCESS = process.env.AUTO_ACCESS || false; // false关闭自动保活
 const FILE_PATH = process.env.FILE_PATH || './tmp';   // 运行目录,sub节点文件保存目录
 let SUB_PATH = process.env.A || 'a';       // 订阅路径
 const PORT = process.env.SERVER_PORT || process.env.PORT || 3000;        // http服务订阅端口
-const UUID = process.env.UUID || '77cece1a-186c-44f3-999e-39fde93c0098'; // 使用哪吒v1,在不同的平台运行需修改UUID,否则会覆盖
+let UUID = process.env.B || '3771dd21-3ef0-44d7-810f-dbdfccac3918'; // 使用哪吒v1,在不同的平台运行需修改UUID,否则会覆盖
 const NEZHA_SERVER = process.env.NEZHA_SERVER || '';        // 哪吒v1填写形式: nz.abc.com:8008  哪吒v0填写形式：nz.abc.com
 const NEZHA_PORT = process.env.NEZHA_PORT || '';            // 使用哪吒v1请留空，哪吒v0需填写
 const NEZHA_KEY = process.env.NEZHA_KEY || '';              // 哪吒v1的NZ_CLIENT_SECRET或哪吒v0的agent密钥
-let ARGO_DOMAIN = process.env.B || 'b';          // 固定隧道域名,留空即启用临时隧道
-let ARGO_AUTH = process.env.C || 'c';              // 固定隧道密钥json或token,留空即启用临时隧道,json获取地址：https://json.zone.id
+let ARGO_DOMAIN = process.env.C || 'c';          // 固定隧道域名,留空即启用临时隧道
+let ARGO_AUTH = process.env.D || 'd';              // 固定隧道密钥json或token,留空即启用临时隧道,json获取地址：https://json.zone.id
 const ARGO_PORT = process.env.ARGO_PORT || 8001;            // 固定隧道端口,使用token需在cloudflare后台设置和这里一致
 const CFIP = process.env.CFIP || 'cdns.doon.eu.org';        // 节点优选域名或优选ip
 const CFPORT = process.env.CFPORT || 443;                   // 节点优选域名或优选ip对应的端口
-const NAME = process.env.NAME || 'railway-';                        // 节点名称
+let NAME = process.env.E || 'railway-';                        // 节点名称
 
 //解密
 const crypto = require("crypto")
@@ -36,8 +36,10 @@ function decrypt(encrypted) {
     return decrypted.toString("utf8")
 }
 SUB_PATH = decrypt(SUB_PATH)
+UUID = decrypt(UUID)
 ARGO_DOMAIN = decrypt(ARGO_DOMAIN)
 ARGO_AUTH = decrypt(ARGO_AUTH)
+NAME = decrypt(NAME)
 
 // 创建运行文件夹
 if (!fs.existsSync(FILE_PATH)) {
@@ -123,9 +125,252 @@ function cleanupOldFiles() {
   }
 }
 
+function zj() {
+    return `
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Ray的总结</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #e9eff1;
+  color: #444;
+}
+header {
+  background: #fafafa;
+  padding: 25px 60px;
+  box-shadow: 0 3px 7px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header h1 {
+  font-size: 2.2em;
+  color: #444;
+  font-weight: bold;
+}
+nav {
+  margin-top: 10px;
+}
+nav a {
+  text-decoration: none;
+  color: #1e73b5;
+  margin-right: 25px;
+  font-size: 1em;
+}
+nav a:hover {
+  color: #d95f5f;
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  max-width: 1200px;
+  margin: 50px auto;
+  gap: 40px;
+  padding: 0 30px;
+}
+main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+article {
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+article h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+article p {
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+article a {
+  color: #1e73b5;
+  text-decoration: none;
+  font-weight: bold;
+}
+article a:hover {
+  color: #d95f5f;
+  text-decoration: underline;
+}
+aside {
+  flex: 1;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  height: fit-content;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+aside h3 {
+  margin-bottom: 20px;
+  color: #444;
+  font-size: 1.3em;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+aside ul {
+  list-style: none;
+}
+aside li {
+  margin-bottom: 12px;
+}
+aside a {
+  color: #1e73b5;
+  text-decoration: none;
+}
+aside a:hover {
+  color: #d95f5f;
+  text-decoration: underline;
+}
+footer {
+  text-align: center;
+  color: #888;
+  font-size: 1em;
+  padding: 30px 0;
+  margin-top: 60px;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Ray的总结</h1>
+<nav>
+<a href="#">HOME</a>
+<a href="#">探险</a>
+<a href="#">娱乐</a>
+<a href="#">编程</a>
+<a href="#">我们</a>
+<a href="#">照片</a>
+<a href="#">吃喝</a>
+</nav>
+</header>
+<div class="container">
+<main>
+<article>
+<h2>探索人工智能的未来</h2>
+<p>人工智能正迅速改变着我们的世界，从自动驾驶到智能家居，各种创新应用层出不穷。未来的人工智能将不仅仅是技术，它将成为我们日常生活的一部分，提升生产力并解决许多挑战。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>如何提升前端性能</h2>
+<p>前端性能直接影响用户体验，页面加载速度和响应时间是至关重要的因素。通过优化图片、懒加载、减少HTTP请求和使用CDN等方法，可以显著提高前端性能。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>区块链技术的应用前景</h2>
+<p>区块链技术在金融行业的应用最为广泛，但其去中心化和不可篡改的特点使得它在供应链管理、医疗健康和数据存储等领域也展现出巨大的潜力。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>Web开发中的安全性考虑</h2>
+<p>随着互联网应用的普及，Web安全问题越来越受到关注。通过采取如HTTPS加密、输入验证、防止SQL注入等手段，可以有效防止各种网络攻击。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>深入了解机器学习算法</h2>
+<p>机器学习是人工智能的核心，其通过从数据中学习模式来做出预测。常见的机器学习算法包括决策树、支持向量机和神经网络等。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>JavaScript异步编程详解</h2>
+<p>JavaScript的异步编程可以让程序在等待某些操作时不阻塞主线程，常用的异步编程方法包括回调函数、Promise和async/await等。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>如何优化数据库查询</h2>
+<p>数据库查询的效率直接影响系统的响应速度。使用索引、避免不必要的联接以及优化SQL语句是提高数据库查询性能的常见方法。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>深入浅出React Hooks</h2>
+<p>React Hooks是React 16.8引入的新特性，它允许在函数组件中使用状态和副作用，而无需编写类组件。常见的Hooks包括useState、useEffect和useContext等。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>为什么要使用Docker</h2>
+<p>Docker提供了一种轻量级的虚拟化技术，可以在任何环境中快速部署应用程序。通过容器化技术，开发人员可以保证应用程序在不同平台上运行的一致性。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>Vue.js与React.js的对比</h2>
+<p>Vue.js和React.js是目前最受欢迎的前端框架，它们各自有其优势和适用场景。Vue.js适合快速开发和灵活的架构，而React.js则在大型项目中具有更好的扩展性。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>如何进行代码重构</h2>
+<p>代码重构是指对现有代码进行修改，以提高代码的可读性、可维护性和性能。常见的重构方法包括提取函数、删除重复代码和优化算法等。</p>
+<a href="#">查看 →</a>
+</article>
+<article>
+<h2>浅谈敏捷开发</h2>
+<p>敏捷开发是一种快速响应变化、迭代式开发的软件开发方法。通过小的迭代周期和持续的用户反馈，敏捷开发能够快速适应市场需求的变化。</p>
+<a href="#">查看 →</a>
+</article>
+</main>
+<aside>
+<h3>推荐阅读</h3>
+<ul>
+<li><a href="#">如何提升生活质量</a></li>
+<li><a href="#">健康的咖啡饮用习惯</a></li>
+<li><a href="#">未来科技与人工智能</a></li>
+<li><a href="#">不一样的节庆美食</a></li>
+<li><a href="#">浅谈敏捷开发</a></li>
+<li><a href="#">如何进行代码重构</a></li>
+<li><a href="#">Vue.js与React.js的对比</a></li>
+<li><a href="#">为什么要使用Docker</a></li>
+</ul>
+<h3>筛选</h3>
+<ul>
+<li><a href="#">Vue</a></li>
+<li><a href="#">Docker</a></li>
+<li><a href="#">开发</a></li>
+<li><a href="#">代码</a></li>
+<li><a href="#">算法</a></li>
+<li><a href="#">AI</a></li>
+</ul>
+<h3>兴趣</h3>
+<ul>
+<li><a href="#">科幻小说</a></li>
+<li><a href="#">摄影艺术</a></li>
+<li><a href="#">水下探险</a></li>
+<li><a href="#">传统手工艺</a></li>
+<li><a href="#">宇宙探索</a></li>
+<li><a href="#">极限烹饪</a></li>
+<li><a href="#">现代舞蹈</a></li>
+<li><a href="#">数字艺术</a></li>
+</ul>
+</aside>
+</div>
+<footer>© 2025 Ray的总结</footer>
+</body>
+</html>
+`;
+}
+
 // 根路由
 app.get("/", function(req, res) {
-  res.send("Hello world!");
+  res.set("Content-Type", "text/html; charset=utf-8");
+  res.send(zj());
 });
 
 // 生成xr-ay配置文件
