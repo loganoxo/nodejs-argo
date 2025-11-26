@@ -22,7 +22,7 @@ let ARGO_AUTH = process.env.D || 'd';              // 固定隧道密钥json或t
 const ARGO_PORT = process.env.ARGO_PORT || 8001;            // 固定隧道端口,使用token需在cloudflare后台设置和这里一致
 const CFIP = process.env.CFIP || 'cdns.doon.eu.org';        // 节点优选域名或优选ip
 const CFPORT = process.env.CFPORT || 443;                   // 节点优选域名或优选ip对应的端口
-let NAME = process.env.E || 'railway-';                        // 节点名称
+let NAME = process.env.E || 'railway';                        // 节点名称
 
 //解密
 const crypto = require("crypto")
