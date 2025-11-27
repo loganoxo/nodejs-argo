@@ -9,6 +9,7 @@ snip_my
 secret*.js
 railway.md
 wispbyte.md
+clawcloud.md
 node_modules/
 /target
 /dist
