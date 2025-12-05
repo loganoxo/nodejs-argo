@@ -10,9 +10,10 @@
   "scripts": {
     "dev": "node index.js",
     "start": "node index.js",
-    "encrypted1": "node secret1.js",
-    "encrypted2": "node secret2.js",
-    "encrypted3": "node secret3.js"
+    "encrypted1": "node secret-railway-us-east.js",
+    "encrypted2": "node secret-railway-us-west.js",
+    "encrypted3": "node secret-clawcloud.js",
+    "encrypted4": "node secret-leaflow.js"
   },
   "dependencies": {
     "axios": "latest",
