@@ -4,9 +4,11 @@ WORKDIR /tmp
 
 # 经测试 使用 COPY . . 时, 需要把secret.js放在.dockerignore中, 或者直接复制单独的文件
 # COPY . .
-COPY Dockerfile index.min.js package.json ./
+COPY index.min.js package.json ./
 
-EXPOSE 3000/tcp
+# 主要起 声明 和 辅助 作用, 而非强制性的网络配置;它主要是一个 元数据 (Metadata), 告诉阅读 Dockerfile 的人或维护者: "这个应用程序默认监听 TCP 协议的 3000 端口".
+# 它不会自动把容器的 3000 端口映射到宿主机,当你使用命令 docker run -P (大写的 P) 启动容器时, Docker 会自动扫描镜像中所有 EXPOSE 的端口, 并将它们随机映射到宿主机的高位端口 (Ephemeral Ports) 上
+# EXPOSE 3000/tcp
 
 RUN apk update && apk upgrade &&\
     apk add --no-cache openssl curl gcompat iproute2 coreutils &&\
