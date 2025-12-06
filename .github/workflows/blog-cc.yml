@@ -8,6 +8,7 @@ on:
       - 'index.js'
       - 'index.min.js'
       - 'package.json'
+      - '.github/workflows/**'
   #  pull_request:
   #    branches: [ main ]
   workflow_dispatch:
