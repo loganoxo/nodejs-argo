@@ -10,7 +10,7 @@ on:
 #      - 'package.json'
 #      - '.github/workflows/blog-cc.yml'
     tags:
-      - 'v**'  # 当推送 v1.0.0 这样的 tag 时触发
+      - 'v**'  # 当推送 v1.0.0 这样的 tag 时触发, 需要在包含此workflow文件的节点上打标签, 对于当前项目需要在主分支打标签并推送
   workflow_dispatch: # 允许手动触发 仅在默认分支(Default Branch)上生效, 若其他分支有相同的workflow文件则可以选择分支手动执行
 
 jobs:
