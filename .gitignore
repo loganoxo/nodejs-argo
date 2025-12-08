@@ -7,10 +7,7 @@ __pycache__
 snip_mi
 snip_my
 secret*.js
-railway.md
-wispbyte.md
-clawcloud.md
-leaflow.md
+deploy-*.md
 node_modules/
 /target
 /dist
