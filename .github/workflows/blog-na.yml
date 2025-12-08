@@ -8,7 +8,7 @@ on:
       - 'index.js'
       - 'index.min.js'
       - 'package.json'
-      - '.github/workflows/**'
+      - '.github/workflows/blog-na.yml'
   #  pull_request:
   #    branches: [ main ]
   workflow_dispatch:

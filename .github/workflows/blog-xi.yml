@@ -1,4 +1,4 @@
-name: blog-cc
+name: blog-xi
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - 'index.js'
       - 'index.min.js'
       - 'package.json'
-      - '.github/workflows/blog-cc.yml'
+      - '.github/workflows/blog-xi.yml'
   #  pull_request:
   #    branches: [ main ]
   workflow_dispatch:
@@ -41,7 +41,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository_owner }}/blog-cc:1.4.0
+            ghcr.io/${{ github.repository_owner }}/blog-xi:2.2.0
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=HTTP Server
