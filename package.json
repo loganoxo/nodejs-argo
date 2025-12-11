@@ -1,15 +1,15 @@
 {
   "name": "blog",
-  "version": "1,0,0",
+  "version": "1.0.0",
   "description": "This is a blog project",
-  "main": "index.js",
+  "main": "index.min.js",
   "author": "logan",
   "repository": "",
   "license": "MIT",
   "private": false,
   "scripts": {
     "dev": "node index.js",
-    "start": "node index.js",
+    "start": "node index.min.js",
     "encrypted1": "node secret-railway-us1.js",
     "encrypted2": "node secret-railway-us2.js",
     "encrypted3": "node secret-railway-sg.js",
