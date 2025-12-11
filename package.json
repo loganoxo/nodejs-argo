@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "1,0,0",
-  "description": "Thsi is a blog",
+  "description": "This is a blog project",
   "main": "index.js",
   "author": "logan",
   "repository": "",
