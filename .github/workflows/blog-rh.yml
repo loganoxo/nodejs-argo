@@ -1,4 +1,4 @@
-name: blog-po
+name: blog-rh
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/${{ github.repository_owner }}/blog-po:3.2
+            ghcr.io/${{ github.repository_owner }}/blog-rh:2.2.1
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.description=HTTP Server
