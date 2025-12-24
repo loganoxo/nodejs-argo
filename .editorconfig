@@ -46,10 +46,10 @@ indent_size = 2
 tab_width = 2
 
 # 👇 禁止格式化的文件列表
-[{index.js,index.min.js}]
-indent_style = unset
-indent_size = unset
-tab_width = unset
+[*.js]
+indent_style = space
+indent_size = 2
+tab_width = 2
 end_of_line = unset
 charset = unset
 trim_trailing_whitespace = false
