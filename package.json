@@ -15,7 +15,8 @@
     "encrypted3": "node secret-railway-sg.js",
     "encrypted4": "node secret-clawcloud.js",
     "encrypted5": "node secret-leaflow.js",
-    "encrypted6": "node secret-koyeb.js"
+    "encrypted6": "node secret-koyeb.js",
+    "encrypted7": "node secret-northflank.js"
   },
   "dependencies": {
     "axios": "latest",
