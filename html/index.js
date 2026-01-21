@@ -29,11 +29,16 @@ const crypto = require("crypto")
 const key = crypto.createHash("sha256").update("bbMXwj24nhu73o4A").digest() // 生成 32 字节密钥
 const iv = Buffer.from("GddgwiSJj4hHsw72") // 固定 16 字节 IV（也可自定义）
 function decrypt(encrypted) {
-    let encryptedBuf = Buffer.from(encrypted, "base64")
-    let decipher = crypto.createDecipheriv("aes-256-cbc", key, iv)
-    let decrypted = decipher.update(encryptedBuf)
-    decrypted = Buffer.concat([decrypted, decipher.final()])
-    return decrypted.toString("utf8")
+    if (encrypted.startsWith("logan_ecd_")){
+        encrypted = encrypted.replace(/^logan_ecd_/,"");
+        let encryptedBuf = Buffer.from(encrypted, "base64")
+        let decipher = crypto.createDecipheriv("aes-256-cbc", key, iv)
+        let decrypted = decipher.update(encryptedBuf)
+        decrypted = Buffer.concat([decrypted, decipher.final()])
+        return decrypted.toString("utf8")
+    }else {
+        return encrypted;
+    }
 }
 SUB_PATH = decrypt(SUB_PATH)
 UUID = decrypt(UUID)
