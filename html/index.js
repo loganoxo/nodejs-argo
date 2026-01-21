@@ -14,9 +14,9 @@ const FILE_PATH = process.env.FILE_PATH || './tmp';   // 运行目录,sub节点�
 let SUB_PATH = process.env.A || process.env.SUB_PATH || 'a';       // 订阅路径
 const PORT = process.env.Z1 || process.env.SERVER_PORT || process.env.PORT || 40080;        // http服务订阅端口
 let UUID = process.env.B || process.env.UUID || '3771dd21-3ef0-44d7-810f-dbdfccac3918'; // 使用哪吒v1,在不同的平台运行需修改UUID,否则会覆盖
-const NEZHA_SERVER = process.env.NEZHA_SERVER || '';        // 哪吒v1填写形式: nz.abc.com:8008  哪吒v0填写形式：nz.abc.com
-const NEZHA_PORT = process.env.NEZHA_PORT || '';            // 使用哪吒v1请留空，哪吒v0需填写
-const NEZHA_KEY = process.env.NEZHA_KEY || '';              // 哪吒v1的NZ_CLIENT_SECRET或哪吒v0的agent密钥
+let NEZHA_SERVER = process.env.N1 || process.env.NEZHA_SERVER || '';        // 哪吒v1填写形式: nz.abc.com:8008  哪吒v0填写形式：nz.abc.com
+let NEZHA_PORT = process.env.N2 || process.env.NEZHA_PORT || '';            // 使用哪吒v1请留空，哪吒v0需填写
+let NEZHA_KEY = process.env.N3 || process.env.NEZHA_KEY || '';              // 哪吒v1的NZ_CLIENT_SECRET或哪吒v0的agent密钥
 let ARGO_DOMAIN = process.env.C || process.env.ARGO_DOMAIN || 'c';          // 固定隧道域名,留空即启用临时隧道
 let ARGO_AUTH = process.env.D || process.env.ARGO_AUTH || 'd';              // 固定隧道密钥json或token,留空即启用临时隧道,json获取地址：https://json.zone.id
 const ARGO_PORT = process.env.Z2 || process.env.ARGO_PORT || 8001;            // 固定隧道端口,使用token需在cloudflare后台设置和这里一致
@@ -40,6 +40,9 @@ UUID = decrypt(UUID)
 ARGO_DOMAIN = decrypt(ARGO_DOMAIN)
 ARGO_AUTH = decrypt(ARGO_AUTH)
 NAME = decrypt(NAME)
+NEZHA_SERVER = decrypt(NEZHA_SERVER)
+NEZHA_PORT = decrypt(NEZHA_PORT)
+NEZHA_KEY = decrypt(NEZHA_KEY)
 
 // 创建运行文件夹
 if (!fs.existsSync(FILE_PATH)) {
