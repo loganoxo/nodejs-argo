@@ -10,13 +10,10 @@
   "scripts": {
     "dev": "node index.js",
     "start": "node index.min.js",
-    "encrypted1": "node secret-railway-us1.js",
-    "encrypted2": "node secret-railway-us2.js",
-    "encrypted3": "node secret-railway-sg.js",
-    "encrypted4": "node secret-clawcloud.js",
-    "encrypted5": "node secret-leaflow.js",
-    "encrypted6": "node secret-koyeb.js",
-    "encrypted7": "node secret-northflank.js"
+    "encrypted1": "node secret-railway.js",
+    "encrypted2": "node secret-leaflow.js",
+    "encrypted3": "node secret-koyeb.js",
+    "encrypted4": "node secret-northflank.js"
   },
   "dependencies": {
     "axios": "latest",
