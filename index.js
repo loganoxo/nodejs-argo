@@ -491,6 +491,26 @@ async function getMetaInfo() {
   }
   return 'Unknown';
 }
+
+  
+  
+/**
+ * 生成指定长度的随机字符串
+ */
+function generateId (len = 8){
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+
+  for (let i = 0; i < len; i++) {
+    // randomInt(min, max) 生成一个 [min, max) 之间的加密级真随机整数
+    const index = crypto.randomInt(0, chars.length);
+    result += chars[index];
+  }
+  return result;
+}
+
+
+  
 // 生成 list 和 sub 信息
 async function generateLinks(argoDomain) {
   const ISP = await getMetaInfo();
