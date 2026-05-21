@@ -22,15 +22,15 @@ const ARGO_PORT = process.env.Z2 || process.env.ARGO_PORT || 8001;            //
 const CFIP = process.env.CFIP || 'saas.sin.fan';        // 节点优选域名或优选ip
 const CFPORT = process.env.CFPORT || 443;                   // 节点优选域名或优选ip对应的端口
 let NAME = process.env.E || process.env.NAME || '';                        // 节点名称
-let KEY_PREFIX = `${process.env.X || 'logan_ecd'}_`;
+let KEY_PREFIX = process.env.X || 'logan_ecd';
 
 //解密
 const crypto = require("crypto")
 const key = crypto.createHash("sha256").update("bbMXwj24nhu73o4A").digest() // 生成 32 字节密钥
 const iv = Buffer.from("GddgwiSJj4hHsw72") // 固定 16 字节 IV（也可自定义）
 function decrypt(encrypted) {
-    if (encrypted.startsWith(KEY_PREFIX)) {
-        encrypted = encrypted.replace(new RegExp(`^${KEY_PREFIX}`), '');
+    if (encrypted.startsWith(`${KEY_PREFIX}_`)) {
+        encrypted = encrypted.replace(new RegExp(`^${KEY_PREFIX}_`), '');
         let encryptedBuf = Buffer.from(encrypted, "base64")
         let decipher = crypto.createDecipheriv("aes-256-cbc", key, iv)
         let decrypted = decipher.update(encryptedBuf)
