@@ -14,7 +14,8 @@
     "encrypted2": "node secret-leaflow.js",
     "encrypted3": "node secret-koyeb.js",
     "encrypted4": "node secret-northflank.js",
-    "encrypted5": "node secret-nvidia.js"
+    "encrypted5": "node secret-nvidia.js",
+    "encrypted6": "node secret-zeabur.js"
   },
   "dependencies": {
     "axios": "1.15.2",
