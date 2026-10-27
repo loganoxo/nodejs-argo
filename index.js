@@ -392,13 +392,13 @@ function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
     baseFiles = [
-      {fileName: "web", fileUrl: "https://logan.1357810.xyz/file/sb1"},
-      {fileName: "bot", fileUrl: "https://logan.1357810.xyz/file/bot1"}
+      {fileName: "webPath", fileUrl: "https://logan.1357810.xyz/file/sb1"},
+      {fileName: "botPath", fileUrl: "https://logan.1357810.xyz/file/bot1"}
     ];
   } else {
     baseFiles = [
-      {fileName: "web", fileUrl: "https://logan.1357810.xyz/file/sb2"},
-      {fileName: "bot", fileUrl: "https://logan.1357810.xyz/file/bot2"}
+      {fileName: "webPath", fileUrl: "https://logan.1357810.xyz/file/sb2"},
+      {fileName: "botPath", fileUrl: "https://logan.1357810.xyz/file/bot2"}
     ];
   }
   if (NEZHA_SERVER && NEZHA_KEY) {
@@ -407,7 +407,7 @@ function getFilesForArchitecture(architecture) {
         ? "https://logan.1357810.xyz/file/n1"
         : "https://logan.1357810.xyz/file/n2";
       baseFiles.unshift({
-        fileName: "npm",
+        fileName: "npmPath",
         fileUrl: npmUrl
       });
     } else {
@@ -415,7 +415,7 @@ function getFilesForArchitecture(architecture) {
         ? "https://logan.1357810.xyz/file/nv1"
         : "https://logan.1357810.xyz/file/nv2";
       baseFiles.unshift({
-        fileName: "php",
+        fileName: "phpPath",
         fileUrl: phpUrl
       });
     }
