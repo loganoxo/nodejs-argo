@@ -392,12 +392,12 @@ function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
     baseFiles = [
-      {fileName: webPath, fileUrl: "https://logan.1357810.xyz/file/sb1"},
+      {fileName: webPath, fileUrl: "https://logan.1357810.xyz/file/xr1"},
       {fileName: botPath, fileUrl: "https://logan.1357810.xyz/file/bot1"}
     ];
   } else {
     baseFiles = [
-      {fileName: webPath, fileUrl: "https://logan.1357810.xyz/file/sb2"},
+      {fileName: webPath, fileUrl: "https://logan.1357810.xyz/file/xr2"},
       {fileName: botPath, fileUrl: "https://logan.1357810.xyz/file/bot2"}
     ];
   }
