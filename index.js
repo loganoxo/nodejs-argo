@@ -387,7 +387,7 @@ uuid: ${UUID}`;
 
 }
 
-//根据系统架构返回对应的url
+//根据系统架构返回对应的url xray
 function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
