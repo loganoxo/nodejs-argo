@@ -387,7 +387,9 @@ uuid: ${UUID}`;
 
 }
 
-//根据系统架构返回对应的url xray v26.6.27
+// 根据系统架构返回对应的url xray v26.6.27
+// https://github.com/XTLS/Xray-core/releases/download/v26.6.27/Xray-linux-64.zip
+// https://github.com/XTLS/Xray-core/releases/download/v26.6.27/Xray-linux-arm64-v8a.zip
 function getFilesForArchitecture(architecture) {
   let baseFiles;
   if (architecture === 'arm') {
